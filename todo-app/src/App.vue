@@ -6,15 +6,14 @@
 
 <script>
 import Index from '@/components/Index';
-import TodoItem from '@/components/TodoItem';
+
 export default {
   name: 'App',
   data() {
     return {};
   },
   components: {
-    Index,
-    TodoItem
+    Index
   }
 };
 </script>
