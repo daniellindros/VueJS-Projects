@@ -30,6 +30,7 @@ export default {
   methods: {
     addTodo(text) {
       this.todos.push({text, completed: false})
+      this.newTodoText = '';
     }
   },
   components: {
