@@ -8,16 +8,21 @@
       <input @keyup.enter="addTodo(newTodoText)" v-model="newTodoText" class="input" type="text" placeholder="What needs to be done?">
     </p>
   </div>
-  <label :key="todo.id" v-for="todo in todos" class="panel-block">
-    <TodoItem 
-      :text="todo.text" 
-      :completed="todo.completed" 
-    />
-  </label>
+  
+  <TodoItem :key="todo.id" v-for="todo in activeFilter()" v-bind="todo" />
+
   <p class="panel-tabs">
-    <a class="is-active">All</a>
-    <a>Incompleted</a>
-    <a>Completed</a>
+    <a 
+      v-bind:class="{ 'is-active': activeFilter === filteredAllTodos }" 
+      @click="activeFilter=filteredAllTodos">All</a>
+    <a 
+      v-bind:class="{ 'is-active': activeFilter === filteredIncompletedTodos }"
+      @click="activeFilter=filteredIncompletedTodos">Incompleted
+    </a>
+    <a 
+      v-bind:class="{ 'is-active': activeFilter === filterCompletedTodos }"
+      @click="activeFilter=filterCompletedTodos">Completed
+    </a>
   </p>
 </nav>
 </template>
@@ -27,29 +32,51 @@ import TodoItem from '@/components/TodoItem';
 
 export default {
   name: 'TodoList',
-  methods: {
-    addTodo(text) {
-      this.todos.push({text, completed: false})
-      this.newTodoText = '';
-    }
-  },
-  components: {
-    TodoItem
-  },
   data() {
     return {
       newTodoText: '',
       todos: [
         {
-        text: 'Buy milk',
-        completed: false
-      },
-       {
-        text: 'Water the plants',
-        completed: false
-      }
-      ]
+          text: 'Buy milk',
+          completed: false
+        },
+        {
+          text: 'Water the plants',
+          completed: false
+        },
+        {
+          text: 'Launch the missles!',
+          completed: true
+        },
+        {
+          text: 'Solve world hunger (tell no one)',
+          completed: false
+        },
+        {
+          text: 'Do the washing up',
+          completed: true
+        }
+      ],
+      activeFilter: this.filteredAllTodos
     };
+  },
+  methods: {
+    addTodo(text) {
+      this.todos.push({text, completed: false})
+      this.newTodoText = '';
+    },
+    filteredAllTodos() { 
+      return this.todos; 
+    },
+    filterCompletedTodos() {
+      return this.todos.filter(todo => todo.completed)
+    },
+    filteredIncompletedTodos() {  
+      return this.todos.filter(todo => !todo.completed)
+    },
+  },
+  components: {
+    TodoItem
   }
 };
 </script>

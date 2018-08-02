@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <input type="checkbox"> {{this.text}}
-  </div>
+  <label class="panel-block">
+    <input type="checkbox" v-model="completed"> {{text}}    
+  </label>
 </template>
 
 <script>
