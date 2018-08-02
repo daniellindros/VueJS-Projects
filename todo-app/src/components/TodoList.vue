@@ -9,7 +9,7 @@
     </p>
   </div>
   
-  <TodoItem :key="todo.id" v-for="todo in activeFilter()" v-bind="todo" />
+  <TodoItem :key="todo.id" v-for="todo in activeFilter()" v-bind.sync="todo" />
 
   <p class="panel-tabs">
     <a 

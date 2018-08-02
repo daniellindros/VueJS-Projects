@@ -1,6 +1,11 @@
 <template>
   <label class="panel-block">
-    <input type="checkbox" v-model="completed"> {{text}}    
+    <input 
+      type="checkbox" 
+      :checked="completed"
+      @input= "$emit( 'update:completed', $event.target.checked  )"
+    > 
+    {{text}}
   </label>
 </template>
 
@@ -10,7 +15,15 @@ export default {
   data() {
     return {};
   },
-  props: { text: String, completed: Boolean }
+  props: { 
+    text: String, 
+    completed: Boolean 
+  },
+  methods: {
+    print() {
+      console.log("changed")
+    }
+  }
 };
 </script>
 
