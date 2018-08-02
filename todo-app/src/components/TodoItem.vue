@@ -1,12 +1,13 @@
 <template>
-  <label class="panel-block">
-    <input 
-      type="checkbox" 
-      :checked="completed"
-      @input= "$emit( 'update:completed', $event.target.checked  )"
-    > 
-    {{text}}
-  </label>
+    <a 
+      class="panel-block"
+      @click="$emit( 'update:completed', !completed  )"
+    >
+      <span class="icon checkbox">
+        <i class="material-icons" aria-hidden="true">{{ completed ? 'check_box' : 'check_box_outline_blank' }}</i>
+      </span>
+      {{text}}
+    </a>    
 </template>
 
 <script>
@@ -18,14 +19,14 @@ export default {
   props: { 
     text: String, 
     completed: Boolean 
-  },
-  methods: {
-    print() {
-      console.log("changed")
-    }
-  }
+    
+  }, 
 };
 </script>
 
-<style>
+<style scoped>
+.checkbox {
+  margin-right: 0.5em;
+}
+
 </style>
