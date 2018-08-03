@@ -9,19 +9,19 @@
     </p>
   </div>
   
-  <TodoItem :key="todo.id" v-for="todo in activeFilter()" v-bind.sync="todo" />
+  <TodoItem :key="todo.id" v-for="todo in todos" v-show="isFiltered(todo)" v-bind.sync="todo" />
 
   <p class="panel-tabs">
     <a 
-      v-bind:class="{ 'is-active': activeFilter === filteredAllTodos }" 
-      @click="activeFilter=filteredAllTodos">All</a>
+      v-bind:class="{ 'is-active': isActiveFilter('all') }" 
+      @click="setActiveFilter('all')">All</a>
     <a 
-      v-bind:class="{ 'is-active': activeFilter === filteredIncompletedTodos }"
-      @click="activeFilter=filteredIncompletedTodos">Incompleted
+      v-bind:class="{ 'is-active': isActiveFilter('incompleted') }"
+      @click="setActiveFilter('incompleted')">Incompleted
     </a>
     <a 
-      v-bind:class="{ 'is-active': activeFilter === filterCompletedTodos }"
-      @click="activeFilter=filterCompletedTodos">Completed
+      v-bind:class="{ 'is-active': isActiveFilter('completed') }"
+      @click="setActiveFilter('completed')">Completed
     </a>
   </p>
 </nav>
@@ -29,10 +29,20 @@
 
 <script>
 import TodoItem from '@/components/TodoItem';
+const filters = {
+    all: t => true,
+    completed: t => t.completed,
+    incompleted: t => !t.completed,
+  }
 
 export default {
   name: 'TodoList',
-  data() {
+  
+  components: {
+    TodoItem
+  },
+  
+  data: function() {
     return {
       newTodoText: '',
       todos: [
@@ -57,7 +67,7 @@ export default {
           completed: true
         }
       ],
-      activeFilter: this.filteredAllTodos
+      activeFilter: 'all',    
     };
   },
   methods: {
@@ -65,19 +75,20 @@ export default {
       this.todos.push({text, completed: false})
       this.newTodoText = '';
     },
-    filteredAllTodos() { 
-      return this.todos; 
+    
+    setActiveFilter(filter) {
+      this.activeFilter = filter
     },
-    filterCompletedTodos() {
-      return this.todos.filter(todo => todo.completed)
+    
+    isActiveFilter(filter) {
+      return this.activeFilter === filter;
     },
-    filteredIncompletedTodos() {  
-      return this.todos.filter(todo => !todo.completed)
+    
+    isFiltered(todo) {
+      console.log(this.activeFilter)
+      return filters[this.activeFilter](todo)
     },
   },
-  components: {
-    TodoItem
-  }
 };
 </script>
 
