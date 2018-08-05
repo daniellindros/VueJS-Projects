@@ -16,11 +16,10 @@ export default {
   data() {
     return {};
   },
-  props: { 
-    text: String, 
-    completed: Boolean 
-    
-  }, 
+  props: {
+    text: String,
+    completed: Boolean
+  }
 };
 </script>
 
@@ -28,5 +27,4 @@ export default {
 .checkbox {
   margin-right: 0.5em;
 }
-
 </style>

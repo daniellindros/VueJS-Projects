@@ -13,7 +13,7 @@
       <div class="column">
       </div>
       <div class="column is-one-third">
-          <TodoList />
+          <TodoApp />
       </div>
       <div class="column">
       </div>
@@ -24,20 +24,16 @@
 </template>
 
 <script>
-import TodoList from '@/components/TodoList';
+import TodoApp from '@/components/TodoApp';
 
 export default {
-    name: 'Index',
-    components: {
-      TodoList
-    },
-    data() {
-        return {}
-    }
+  name: 'Index',
+  components: {
+    TodoApp
+  },
+  data() {
+    return {};
+  }
 };
 </script>
-
-<style>
-
-</style>
 
