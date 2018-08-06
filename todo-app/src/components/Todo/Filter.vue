@@ -15,33 +15,22 @@
 </template>
 
 <script>
-const filters = {
-  all: t => true,
-  completed: t => t.completed,
-  incompleted: t => !t.completed
-};
-
 export default {
-  name: 'TodoFilter',
+  name: 'Filter',
   data() {
     return {
       activeFilter: 'all'
     };
   },
   methods: {
-    addTodo(text) {
-      this.todos.push({ text, completed: false });
-      this.newTodoText = '';
-    },
-
     setActiveFilter(selectedfilter) {
+      this.$emit('filter-changed', selectedfilter)
       this.activeFilter = selectedfilter;
     },
-
     isActiveFilter(filter) {
+      this.$emit('clicked', 9, 'data')
       return this.activeFilter === filter;
     },
-
     isFiltered(todo) {
       console.log(this.activeFilter);
       return filters[this.activeFilter](todo);

@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'TodoAdd',
+  name: 'InputAdd',
   data() {
     return {
       newTodoText: ''
