@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'Filter',
+  name: 'Filters',
   data() {
     return {
       activeFilter: 'all'
@@ -24,11 +24,11 @@ export default {
   },
   methods: {
     setActiveFilter(selectedfilter) {
-      this.$emit('filter-changed', selectedfilter)
+      this.$emit('filter-changed', selectedfilter);
       this.activeFilter = selectedfilter;
     },
     isActiveFilter(filter) {
-      this.$emit('clicked', 9, 'data')
+      this.$emit('clicked', 9, 'data');
       return this.activeFilter === filter;
     },
     isFiltered(todo) {

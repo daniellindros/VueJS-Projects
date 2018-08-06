@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {v4 as uuidv4} from 'uuid'
+import { v4 as uuidv4 } from 'uuid';
 
 Vue.use(Vuex);
 
 const defaultState = {
-  filters: {
-    all,
-    completed,
-    incompleted
+  todoFilters: {
+    all: 'all',
+    completed: 'completed',
+    incompleted: 'incompleted'
   },
   todos: [
     {
@@ -46,11 +46,27 @@ export const store = new Vuex.Store({
     filters: state => state.filters
   },
   mutations: {
-      addTodo: (state, payload) => {
-        state.todos.push(payload.todo);
-      },
-      removeTodo: (state, payload) => {
-        state.todos.filter(todo => todo.id !== payload.todo.id)
-      }
+    toggleCompleted: (state, payload) => {
+      state.todos.find(todo => todo.id === payload.todo.id).completed
+        ? true
+        : false;
+    },
+    addTodo: (state, payload) => {
+      state.todos.push(payload.todo);
+    },
+    removeTodo: (state, payload) => {
+      state.todos.filter(todo => todo.id !== payload.todo.id);
     }
+  },
+  actions: {
+    toggleCompleted: ({ commit }, payload) => {
+      commit('toggleCompleted', payload);
+    },
+    addTodo: ({ commit }, payload) => {
+      commit('addTodo', payload);
+    },
+    removeTodo: ({ commit }, payload) => {
+      commit('removeTodo', payload);
+    }
+  }
 });

@@ -5,16 +5,15 @@
   </p>
 
   <InputAdd />
-  <List />
-  <Filter @clicked='doMagic'/>
-
+  <ListContainer />
+  <!-- <Filters /> -->
 </nav>
 </template>
 
 <script>
 import InputAdd from '@/components/Todo/InputAdd';
-import List from '@/components/Todo/List';
-import Filter from '@/components/Todo/Filter';
+import ListContainer from '@/containers/Todo/ListContainer';
+import Filters from '@/components/Todo/Filters';
 
 import { mapGetters } from 'vuex';
 
@@ -22,14 +21,11 @@ export default {
   name: 'App',
   components: {
     InputAdd,
-    List,
-    Filter
+    ListContainer,
+    Filters
   },
   computed: {
     ...mapGetters(['todos', 'filters'])
-  },
-  data() {
-    return {};
-  },
+  }
 };
 </script>
