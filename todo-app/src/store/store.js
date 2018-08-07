@@ -44,34 +44,40 @@ const defaultState = {
 export const store = new Vuex.Store({
   state: defaultState,
   getters: {
-    todos: state => state.todos,
-    filters: state => state.filters
+    todos: state => completed => {
+      if (completed === undefined) {
+        return state.todos;
+      }
+      else {
+        return state.todos.find(todo => todo.completed === completed);
+      }
+    },
+    filters: state => state.filters,
+    filteredTodos: state => state.todos.filter(filterObj => {
+      todo.completed
+    })
   },
   mutations: {
-    [ADD_TODO](state, payload) {
-      state.todos.push({
-        id: uuidv4(),
-        text: payload,
-        completed: false
-      });
+    [ADD_TODO](state, todo) {
+      state.todos.push(todo);
     },
-    [REMOVE_TODO](state, payload) {
-      state.todos = state.todos.filter(todo => todo.id !== payload);
+    [REMOVE_TODO](state, id) {
+      state.todos = state.todos.filter(todo => todo.id !== id);
     },
-    [TOGGLE_TODO_COMPLETED](state, payload) {
-      const index = state.todos.findIndex(todo => todo.id === payload);
+    [TOGGLE_TODO_COMPLETED](state, id) {
+      const index = state.todos.findIndex(todo => todo.id === id);
       state.todos[index].completed = !state.todos[index].completed 
     }      
   },
   actions: {
-    [ADD_TODO]({ commit }, payload) {
-      commit(ADD_TODO, payload);
+    [ADD_TODO]({ commit }, todo) {
+      commit(ADD_TODO, todo);
     },
-    [REMOVE_TODO]({ commit }, payload) {
-      commit(REMOVE_TODO, payload);
+    [REMOVE_TODO]({ commit }, id) {
+      commit(REMOVE_TODO, id);
     },
-    [TOGGLE_TODO_COMPLETED]({ commit }, payload) {
-      commit(TOGGLE_TODO_COMPLETED, payload);
+    [TOGGLE_TODO_COMPLETED]({ commit }, id) {
+      commit(TOGGLE_TODO_COMPLETED, id);
     }
   }
 });

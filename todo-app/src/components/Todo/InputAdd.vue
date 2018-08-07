@@ -8,6 +8,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import Todo from '@/helpers/todo'
 import { ADD_TODO } from '@/store/actions-type'
 
 export default {
@@ -23,7 +24,8 @@ export default {
       if (!this.newTodoText) {
         return;
       }
-      this.$store.dispatch(ADD_TODO, this.newTodoText);
+      const todo = new Todo(this.newTodoText, false);
+      this.$store.dispatch(ADD_TODO, todo);
       this.newTodoText = '';
     }
   }

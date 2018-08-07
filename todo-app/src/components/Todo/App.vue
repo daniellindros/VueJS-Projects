@@ -5,7 +5,7 @@
   </p>
   <InputAdd />
   <ListContainer />
-  <!-- <Filters /> -->
+  <Filters />
 </nav>
 </template>
 
