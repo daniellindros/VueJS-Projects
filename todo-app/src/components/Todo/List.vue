@@ -14,8 +14,5 @@ export default {
     Item
   },
   props: ['todos'],
-  data() {
-    return {};
-  }
 };
 </script>

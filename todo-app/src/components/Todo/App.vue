@@ -3,7 +3,6 @@
   <p class="panel-heading">
     Todo List
   </p>
-
   <InputAdd />
   <ListContainer />
   <!-- <Filters /> -->
@@ -12,7 +11,7 @@
 
 <script>
 import InputAdd from '@/components/Todo/InputAdd';
-import ListContainer from '@/containers/Todo/ListContainer';
+import ListContainer from '@/components/Todo/ListContainer';
 import Filters from '@/components/Todo/Filters';
 
 import { mapGetters } from 'vuex';

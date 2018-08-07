@@ -8,6 +8,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { ADD_TODO } from '@/store/actions-type'
 
 export default {
   name: 'InputAdd',
@@ -17,7 +18,14 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['addTodo'])
+    ...mapActions(['addTodo']),
+    addTodo() {
+      if (!this.newTodoText) {
+        return;
+      }
+      this.$store.dispatch(ADD_TODO, this.newTodoText);
+      this.newTodoText = '';
+    }
   }
 };
 </script>

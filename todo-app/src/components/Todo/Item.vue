@@ -1,5 +1,5 @@
 <template>
-    <a class="panel-block" @click="toggleCompleted(id)">
+    <a class="panel-block" @click="toggleCompleted()">
       <span class="icon checkbox">
         <i class="material-icons" aria-hidden="true">{{ completed ? 'check_box' : 'check_box_outline_blank' }}</i>
       </span>
@@ -9,6 +9,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { TOGGLE_TODO_COMPLETED } from '@/store/actions-type'
 
 export default {
   name: 'Item',
@@ -21,7 +22,10 @@ export default {
     completed: Boolean
   },
   methods: {
-    ...mapActions(['toggleCompleted'])
+    ...mapActions([TOGGLE_TODO_COMPLETED]),
+    toggleCompleted() {
+      this.$store.dispatch(TOGGLE_TODO_COMPLETED, this.id);
+    }
   }
 };
 </script>
