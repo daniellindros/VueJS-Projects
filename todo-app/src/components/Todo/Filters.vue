@@ -1,39 +1,42 @@
 <template>
   <p class="panel-tabs">
     <a 
-      v-bind:class="{ 'is-active': isActiveFilter('all') }" 
-      @click="setActiveFilter('all')">All</a>
+      v-bind:class="{ 'is-active': isActiveFilter(filters.ALL) }" 
+      @click="changeFilter(filters.ALL)">All</a>
     <a 
-      v-bind:class="{ 'is-active': isActiveFilter('incompleted') }"
-      @click="setActiveFilter('incompleted')">Incompleted
+      v-bind:class="{ 'is-active': isActiveFilter(filters.INCOMPLETED) }"
+      @click="changeFilter(filters.INCOMPLETED)">Incompleted
     </a>
     <a 
-      v-bind:class="{ 'is-active': isActiveFilter('completed') }"
-      @click="setActiveFilter('completed')">Completed
+      v-bind:class="{ 'is-active': isActiveFilter(filters.COMPLETED) }"
+      @click="changeFilter(filters.COMPLETED)">Completed
     </a>
   </p>
 </template>
 
 <script>
+import { CHANGE_FILTER } from "@/store/actions.constants";
+import { GET_ACTIVE_FILTER } from "@/store/getters.constants";
+import { filters } from "@/helpers/todo";
+import { mapActions, mapGetters } from "vuex";
+
 export default {
-  name: 'Filters',
+  name: "Filters",
   data() {
     return {
-      activeFilter: 'all'
+      filters
     };
   },
+  computed: {
+    ...mapGetters([GET_ACTIVE_FILTER])
+  },
   methods: {
-    setActiveFilter(selectedfilter) {
-      this.$emit('filter-changed', selectedfilter);
-      this.activeFilter = selectedfilter;
+    ...mapActions([CHANGE_FILTER]),
+    changeFilter(filter) {
+      this.$store.dispatch(CHANGE_FILTER, filter);
     },
     isActiveFilter(filter) {
-      this.$emit('clicked', 9, 'data');
       return this.activeFilter === filter;
-    },
-    isFiltered(todo) {
-      console.log(this.activeFilter);
-      return filters[this.activeFilter](todo);
     }
   }
 };

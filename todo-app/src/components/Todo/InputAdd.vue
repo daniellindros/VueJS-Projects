@@ -7,26 +7,26 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import Todo from '@/helpers/todo'
-import { ADD_TODO } from '@/store/actions-type'
+import { mapActions } from "vuex";
+import { Todo } from "@/helpers/todo";
+import { ADD_TODO } from "@/store/actions.constants";
 
 export default {
-  name: 'InputAdd',
+  name: "InputAdd",
   data() {
     return {
-      newTodoText: ''
+      newTodoText: ""
     };
   },
   methods: {
-    ...mapActions(['addTodo']),
+    ...mapActions(["addTodo"]),
     addTodo() {
       if (!this.newTodoText) {
         return;
       }
       const todo = new Todo(this.newTodoText, false);
       this.$store.dispatch(ADD_TODO, todo);
-      this.newTodoText = '';
+      this.newTodoText = "";
     }
   }
 };

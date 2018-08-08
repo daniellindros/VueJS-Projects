@@ -24,15 +24,12 @@
 </template>
 
 <script>
-import App from '@/components/Todo/App';
+import App from "@/components/Todo/App";
 
 export default {
-  name: 'Index',
+  name: "Index",
   components: {
     App
-  },
-  data() {
-    return {};
   }
 };
 </script>

@@ -10,21 +10,18 @@
 </template>
 
 <script>
-import InputAdd from '@/components/Todo/InputAdd';
-import ListContainer from '@/components/Todo/ListContainer';
-import Filters from '@/components/Todo/Filters';
+import InputAdd from "@/components/Todo/InputAdd";
+import ListContainer from "@/components/Todo/ListContainer";
+import Filters from "@/components/Todo/Filters";
 
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     InputAdd,
     ListContainer,
     Filters
-  },
-  computed: {
-    ...mapGetters(['todos', 'filters'])
   }
 };
 </script>

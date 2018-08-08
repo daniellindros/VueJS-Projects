@@ -1,83 +1,87 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { v4 as uuidv4 } from 'uuid';
-import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO_COMPLETED }
-   from '@/store/actions-type';
+import { filters, Todo } from '@/helpers/todo'
+import {
+    ADD_TODO,
+    REMOVE_TODO,
+    TOGGLE_TODO_COMPLETED,
+    CHANGE_FILTER
+} from '@/store/actions.constants';
+import {
+    GET_TODOS,
+    GET_ACTIVE_FILTER
+} from '@/store/getters.constants'
+
 
 Vue.use(Vuex);
 
 const defaultState = {
-  filters: {
-    all: 'all',
-    completed: 'completed',
-    incompleted: 'incompleted'
-  },
-  todos: [
-    {
-      id: uuidv4(),
-      text: 'Buy milk',
-      completed: false
-    },
-    {
-      id: uuidv4(),
-      text: 'Water the plants',
-      completed: false
-    },
-    {
-      id: uuidv4(),
-      text: 'Launch the missles!',
-      completed: true
-    },
-    {
-      id: uuidv4(),
-      text: 'Solve world hunger (tell no one)',
-      completed: false
-    },
-    {
-      id: uuidv4(),
-      text: 'Do the washing up',
-      completed: true
-    }
-  ]
+    todos: [
+        new Todo('Buy milk'),
+        new Todo('Water the plants'),
+        new Todo('Fire the laser!!', true),
+        new Todo('Solve world hunger (tell no one)'),
+        new Todo('Do the washing up', true),
+    ],
+    activeFilter: filters.ALL
 };
 
 export const store = new Vuex.Store({
-  state: defaultState,
-  getters: {
-    todos: state => completed => {
-      if (completed === undefined) {
-        return state.todos;
-      }
-      else {
-        return state.todos.find(todo => todo.completed === completed);
-      }
+    state: defaultState,
+    getters: {
+        [GET_TODOS]: (state) => {
+            switch (state.activeFilter) {
+                case filters.ALL:
+                    return state.todos;
+                case filters.COMPLETED:
+                    return state.todos.filter(todo => todo.completed)
+                case filters.INCOMPLETED:
+                    return state.todos.filter(todo => !todo.completed)
+            }
+        },
+        todos: (state) => {
+            switch (state.activeFilter) {
+                case filters.ALL:
+                    return state.todos;
+                case filters.COMPLETED:
+                    return state.todos.filter(todo => todo.completed)
+                case filters.INCOMPLETED:
+                    return state.todos.filter(todo => !todo.completed)
+            }
+        },
+        [GET_ACTIVE_FILTER]: (state) => {
+            return state.activeFilter;
+        }
     },
-    filters: state => state.filters,
-    filteredTodos: state => state.todos.filter(filterObj => {
-      todo.completed
-    })
-  },
-  mutations: {
-    [ADD_TODO](state, todo) {
-      state.todos.push(todo);
+    mutations: {
+        [ADD_TODO](state, todo) {
+            state.todos.push(todo);
+        },
+        [REMOVE_TODO](state, id) {
+            state.todos = state.todos.filter(todo => todo.id !== id);
+        },
+        [TOGGLE_TODO_COMPLETED](state, id) {
+            const index = state.todos.findIndex(todo => todo.id === id);
+            state.todos[index].completed = !state.todos[index].completed
+        },
+        [CHANGE_FILTER](state, filter) {
+            state.activeFilter = filter;
+        }
+
     },
-    [REMOVE_TODO](state, id) {
-      state.todos = state.todos.filter(todo => todo.id !== id);
-    },
-    [TOGGLE_TODO_COMPLETED](state, id) {
-      const index = state.todos.findIndex(todo => todo.id === id);
-      state.todos[index].completed = !state.todos[index].completed 
-    }      
-  },
-  actions: {
-    [ADD_TODO]({ commit }, todo) {
-      commit(ADD_TODO, todo);
-    },
-    [REMOVE_TODO]({ commit }, id) {
-      commit(REMOVE_TODO, id);
-    },
-    [TOGGLE_TODO_COMPLETED]({ commit }, id) {
-      commit(TOGGLE_TODO_COMPLETED, id);
+    actions: {
+        [ADD_TODO]({ commit }, todo) {
+            commit(ADD_TODO, todo);
+        },
+        [REMOVE_TODO]({ commit }, id) {
+            commit(REMOVE_TODO, id);
+        },
+        [TOGGLE_TODO_COMPLETED]({ commit }, id) {
+            commit(TOGGLE_TODO_COMPLETED, id);
+        },
+        [CHANGE_FILTER]({ commit }, filter) {
+            commit(CHANGE_FILTER, filter);
+        }
     }
-  }
 });

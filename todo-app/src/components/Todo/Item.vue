@@ -9,7 +9,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { TOGGLE_TODO_COMPLETED } from '@/store/actions-type'
+import { TOGGLE_TODO_COMPLETED } from '@/store/actions.constants'
 
 export default {
   name: 'Item',
