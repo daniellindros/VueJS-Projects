@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import List from "@/components/Todo/List";
-import { GET_TODOS } from "@/store/getters.constants";
-import { mapGetters } from "vuex";
+import List from '@/components/Todo/List';
+import { GET_TODOS } from '@/store/getters.constants';
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "ListContainer",
+  name: 'ListContainer',
   components: {
     List
   },

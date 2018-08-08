@@ -15,13 +15,13 @@
 </template>
 
 <script>
-import { CHANGE_FILTER } from "@/store/actions.constants";
-import { GET_ACTIVE_FILTER } from "@/store/getters.constants";
-import { filters } from "@/helpers/todo";
-import { mapActions, mapGetters } from "vuex";
+import { CHANGE_FILTER } from '@/store/actions.constants';
+import { GET_ACTIVE_FILTER } from '@/store/getters.constants';
+import { filters } from '@/helpers/todo';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: "Filters",
+  name: 'Filters',
   data() {
     return {
       filters
