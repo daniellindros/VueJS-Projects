@@ -9,7 +9,7 @@
 <script>
 import { mapActions } from 'vuex';
 import { Todo } from '@/helpers/todo';
-import { ADD_TODO } from '@/store/actions.constants';
+import { ADD_TODO } from '@/store/todo/todo';
 
 export default {
   name: 'InputAdd',

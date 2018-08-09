@@ -15,8 +15,7 @@
 </template>
 
 <script>
-import { CHANGE_FILTER } from '@/store/actions.constants';
-import { GET_ACTIVE_FILTER } from '@/store/getters.constants';
+import { CHANGE_FILTER, GET_ACTIVE_FILTER } from '@/store/todo/todo';
 import { filters } from '@/helpers/todo';
 import { mapActions, mapGetters } from 'vuex';
 

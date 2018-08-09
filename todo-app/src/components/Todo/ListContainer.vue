@@ -6,7 +6,7 @@
 
 <script>
 import List from '@/components/Todo/List';
-import { GET_TODOS } from '@/store/getters.constants';
+import { GET_TODOS } from '@/store/todo/todo';
 import { mapGetters } from 'vuex';
 
 export default {
