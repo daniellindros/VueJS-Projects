@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { CHANGE_FILTER, GET_ACTIVE_FILTER } from '@/store/todo/todo';
+import { CHANGE_FILTER, GET_ACTIVE_FILTER } from '@/store/modules/todo';
 import { filters } from '@/helpers/todo';
 import { mapActions, mapGetters } from 'vuex';
 

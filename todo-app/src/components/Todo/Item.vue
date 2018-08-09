@@ -9,7 +9,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { TOGGLE_TODO_COMPLETED } from '@/store/todo/todo';
+import { TOGGLE_TODO_COMPLETED } from '@/store/modules/todo';
 
 export default {
   name: 'Item',
